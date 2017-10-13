@@ -8,6 +8,7 @@ const start = async () => {
   // create listener
   const listener = remit(remitConfig);
   Commands.start(listener);
+  logger.trace('endpoints added and linstening');
   return listener;
 };
 module.exports = { start };

@@ -2,34 +2,34 @@ const { MathInterface } = require('../interfaces');
 
 const handlers = [
   {
-    pattern: 'math.sum',
+    pattern: 'sum',
     handler: (msg) => {
       const { a, b } = msg.data;
       return MathInterface.sum(a, b);
     },
   },
   {
-    pattern: 'math.sumInternal',
+    pattern: 'sumInternal',
     handler: async (msg) => {
       const { a, b } = msg.data;
       return MathInterface.sumInternal(a, b);
     },
   },
   {
-    pattern: 'math.times',
+    pattern: 'times',
     handler: async (msg) => {
       const { a, b } = msg.data;
       return MathInterface.pow(a, b);
     },
   },
   {
-    pattern: 'math.error',
+    pattern: 'error',
     handler: async (msg) => {
       return MathInterface.errorServer();
     },
   },
   {
-    pattern: 'math.bussinesError',
+    pattern: 'bussinesError',
     handler: async (msg) => {
       return MathInterface.bussinessError();
     },

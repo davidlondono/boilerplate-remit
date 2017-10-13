@@ -10,7 +10,8 @@
   "scripts": {
     "start": "node src",
     "test": "ava",
-    "fix": "eslint fix"
+    "fix": "eslint fix",
+    "lint": "eslint src"
   },
   "dependencies": {
     "bluebird": "^3.5.1",

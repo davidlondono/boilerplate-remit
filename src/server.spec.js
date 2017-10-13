@@ -1,3 +1,4 @@
+global.Promise = require('bluebird');
 const remitConfig = require('./config/remit');
 const server = require('./server');
 const remit = require('remit');
@@ -13,22 +14,21 @@ const repeatBench = (name, times, callback) => {
     .then((o) => {
       console.timeEnd(name);
       return o;
-    }, { concurrency: 50 });
+    }, { concurrency: 1 });
 };
 
 
 test.before(() => server.start());
 
 test('make a sum', async (t) => {
-  const msg = await listener.request('math.sum').send({ a:1, b: 5})
-
+  const msg = await listener.request('app.math.sum').send({ a:1, b: 5});
   const { data } = msg;
   t.is(data, 6);
 });
 
 
-test('make benchmark internal sum', async (t) => {
+test.only('make benchmark internal sum', async (t) => {
   // t.plan(1);
-  await repeatBench('double sum', 10000, () => listener.request('math.sum').send({ a:1, b: 5}));
+  await repeatBench('double sum', 100000, () => listener.request('app.math.sum').send({ a:1, b: 5}));
   t.pass();
 });

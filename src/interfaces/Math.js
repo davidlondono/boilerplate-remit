@@ -1,11 +1,11 @@
-const { Algebra, Math } = require('../helper/publisher');
+const { Algebra, math } = require('../helper/publisher');
 
 const sum = (a, b) => ({ ok: true, data: (a + b) });
 
 const pow = async (a, b) => ({ ok: true, data: (a * b) });
 
 const sumInternal = async (a, b) => {
-  const data = await Math.sum({ a, b });
+  const data = await math.sum({ a, b });
   return { ok: true, data };
 };
 const mulptMatrix = async (a, b) => {
