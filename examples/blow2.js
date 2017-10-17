@@ -2,8 +2,6 @@ const remitConfig = require('../src/config/remit');
 const publisher = require('../src/helper/publisher')
 const remit = require('remit');
 
-
-
 const interval = 300;
 let counter = 0;
 let startTime = Date.now();

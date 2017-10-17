@@ -5,7 +5,7 @@ const remit = require('remit');
 const Promise = require('bluebird');
 const test = require('ava');
 
-
+console.log(remitConfig);
 const listener = remit(remitConfig);
 
 const repeatBench = (name, times, callback) => {
@@ -17,18 +17,16 @@ const repeatBench = (name, times, callback) => {
     }, { concurrency: 1 });
 };
 
-
 test.before(() => server.start());
 
 test('make a sum', async (t) => {
-  const msg = await listener.request('app.math.sum').send({ a:1, b: 5});
+  const msg = await listener.request('math.math.sum').send({ a: 1, b: 5 });
   const { data } = msg;
   t.is(data, 6);
 });
 
-
-test.only('make benchmark internal sum', async (t) => {
-  // t.plan(1);
-  await repeatBench('double sum', 100000, () => listener.request('app.math.sum').send({ a:1, b: 5}));
+test('make benchmark internal sum', async (t) => {
+  t.plan(1);
+  await repeatBench('double sum', 10000, () => listener.request('math.math.sum').send({ a: 1, b: 5 }));
   t.pass();
 });

@@ -15,6 +15,7 @@ const errorHandler = (err) => {
 };
 
 const parseString = s => s.replace(/\.?([A-Z]+)/g, (x, y) => `.${y.toLowerCase()}`);
+
 const handlerAdder = remit => (item) => {
   const containsTwoPoints = item.pattern.includes(':');
   if (containsTwoPoints) {
@@ -28,7 +29,7 @@ const handlerAdder = remit => (item) => {
   if (!serviceName) {
     throw new Error('missing enviroment SERVICE_NAME');
   }
-  logger.trace(`add handler for${item.pattern} with name ${endpointName}`);
+  logger.trace(`add handler for ${item.pattern} with name ${queueName}`);
   return remit
     .endpoint(queueName)
     .handler(async (event) => {
