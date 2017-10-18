@@ -1,4 +1,4 @@
-class BussinessError extends Error {
+class BusinessError extends Error {
   constructor(message, status) {
     // Calling parent constructor of base Error class.
     super(message);
@@ -17,4 +17,4 @@ class BussinessError extends Error {
     this.bussiness = true;
   }
 }
-module.exports = BussinessError;
+module.exports = BusinessError;
