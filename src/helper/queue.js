@@ -6,7 +6,7 @@ const { app: appName, service: serviceOwnName } = appConfig;
 
 const parseString = s => s.replace(/\.?([A-Z]+)/g, (x, y) => `.${y.toLowerCase()}`);
 
-const request = ({ serviceName, interfaceMethod, client, options = {} }) => {
+const queue = ({ serviceName, interfaceMethod, client, options = {} }) => {
   const endpoint = parseString(interfaceMethod);
   const queueName = `${appName}.${serviceName || serviceOwnName}.${endpoint}`;
   const run = client.request(queueName).options(options);
@@ -22,4 +22,4 @@ const request = ({ serviceName, interfaceMethod, client, options = {} }) => {
   };
 };
 
-module.exports = request;
+module.exports = queue;

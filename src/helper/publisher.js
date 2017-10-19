@@ -4,7 +4,7 @@ const REMIT_CONFIG = require('../config/remit');
 const services = require('../config/services');
 const appConfig = require('../config/app');
 // const queueFactory = require('../helper/queue');
-const request = require('../helper/request');
+const queue = require('../helper/queue');
 
 const { service: serviceOwnName } = appConfig;
 
@@ -20,11 +20,8 @@ const start = () => _.reduce(services, (publisher, service) => {
   if (!endpoints) {
     throw new Error(`no "endpoints" found on ${service}`);
   }
-  // seneca client using service config
+  // remit client using service config
   const client = remit(_.assign(remitConfig, options));
-
-  // create queue manager with remit
-  // const queue = queueFactory(client);
 
   // create the commands using the queue of each pin
   const commands = _.reduce(endpoints, (t, interfaceMethod) => {
@@ -37,7 +34,7 @@ const start = () => _.reduce(services, (publisher, service) => {
       throw new Error(`interfaceMethod ${interfaceMethod} already exist on service ${serviceName}`);
     }
     // add queue of a pin
-    return _.set(t, interfaceMethod, request({ serviceName, interfaceMethod, client, options }));
+    return _.set(t, interfaceMethod, queue({ serviceName, interfaceMethod, client, options }));
   }, {});
   // add commands on to the service name
   publisher[serviceName || alias || serviceOwnName] = commands;
