@@ -24,12 +24,14 @@ const handlers = [
   },
   {
     pattern: 'error',
+    service: 'errorServices',
     handler: async (msg) => {
       return MathInterface.errorServer();
     },
   },
   {
     pattern: 'bussinesError',
+    service: 'errorServices',
     handler: async (msg) => {
       return MathInterface.bussinessError();
     },
