@@ -35,7 +35,7 @@ const handlerAdder = remit => (item) => {
     .endpoint(queueName)
     .handler(async (event) => {
       try {
-        return await item.handler(event);
+        return { ok: true, data: await item.handler(event) };
       } catch (err) {
         return errorHandler(err);
       }
