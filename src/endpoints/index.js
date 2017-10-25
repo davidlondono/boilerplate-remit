@@ -1,4 +1,3 @@
-// @flow
 const _ = require('lodash');
 const logger = require('../logger');
 const handlers = require('./handlers');
